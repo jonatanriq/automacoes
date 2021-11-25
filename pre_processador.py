@@ -21,3 +21,11 @@ def datas_indices_oceanpy(dataset, colunas):
   nino.drop([nomes for nomes in nino.columns[colunas]], axis=1, inplace=True)
   
   return nino
+
+def analise_colunas(dataset):
+  # removendo colunas que tenham mais de 50% de valores faltantes
+  for nome in dataset.columns[:]:
+    if dataset[nome].isnull().sum()/len(dataset[nome]) > 0.5: 
+      dataset.drop(nome, axis=1,inplace=True)
+   
+  return dataset
